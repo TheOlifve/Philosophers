@@ -6,7 +6,7 @@
 #    By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/03 10:59:36 by rugrigor          #+#    #+#              #
-#    Updated: 2023/10/16 12:12:34 by hrahovha         ###   ########.fr        #
+#    Updated: 2023/10/31 13:33:45 by hrahovha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,17 @@ BUILD = build
 
 CC = cc
 
-SRC = 	src/main.c
-
-LIBFT = libft
+SRC = 	src/main.c\
+		src/load.c\
+		src/utils.c\
+		src/philo.c\
+		src/error.c
 
 OBJ = $(patsubst %.c, %.o, $(SRC))
 
 MINI = $(patsubst %.o, $(BUILD)/%.o, $(OBJ))
 
 CFLAGS = -g -Wall -Wextra -Werror
-
-INC = -Ilibft
 
 $(BUILD)/%.o: %.c Makefile
 	@mkdir -p $(BUILD)/src
@@ -35,14 +35,12 @@ $(BUILD)/%.o: %.c Makefile
 all: $(NAME)
 
 $(NAME) : $(MINI)
-	$(MAKE) -C $(LIBFT)
-	$(CC) $(CFLAGS) $(MINI) $(INC) -o $(NAME) -L./libft -lft
+	$(CC) $(CFLAGS) $(MINI) $(INC) -o $(NAME)
 
 fclean: clean
 	rm -rf $(NAME) $(BUILD)
 	
 clean:
-	$(MAKE) clean -C $(LIBFT)
 	rm -rf $(OBJ)
 
 
