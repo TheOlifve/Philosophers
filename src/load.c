@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:02:28 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 21:12:04 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/06 23:38:54 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ int	philo_init(t_data *data)
 {
 	int	i;
 	
-	i = -1;
-	while (++i < data->ph_cnt)
+	i = 0;
+	while (i < data->ph_cnt)
 	{
 		data->philo[i].id = i + 1;
 		data->philo[i].eat_cnt = 0;
 		data->philo[i].time_left = get_time() + data->die_time;//in milliseconds
 		data->philo[i].data = data;
+		i++;
 	}
 	return (0);
 }

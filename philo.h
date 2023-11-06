@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:44:22 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 21:10:50 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/06 23:08:20 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			ft_atoi(const char *str);
 int			err(char *str);
 int			load(t_data *data, int argc, char **argv);
 int			philo_create(t_data *data);
+void		my_sleep(int time);
 void		msg(t_philo *philo, char *str);
 void		dead_check(t_data *data, int i, long long test);
 long long	get_time(void);

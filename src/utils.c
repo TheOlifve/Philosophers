@@ -6,17 +6,19 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:41:06 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 21:11:17 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/06 23:52:55 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-
-int	err(char *str)
+void	my_sleep(int time)
 {
-	printf("%s\n", str);
-	return (1);
+	long long	start;
+
+	start = get_time();
+	while (get_time() - start < time)
+		;
 }
 
 long long	get_time(void)
@@ -73,8 +75,8 @@ void	dead_check(t_data *data, int i, long long test)
 {
 	while (data->is_dead == 0)
 	{
-		i = 0;
-		while (i++ < data->ph_cnt)
+		i = -1;
+		while (++i < data->ph_cnt)
 		{
 			test = get_time();
 			pthread_mutex_lock(&data->lock);
@@ -83,8 +85,7 @@ void	dead_check(t_data *data, int i, long long test)
 				data->is_dead = 1;
 				pthread_mutex_lock(&data->print);
 				printf("%lld ms %d died\n", (test - data->start_time),
-				i + 1);
-				pthread_mutex_unlock(&data->print);
+				data->philo[i].id);
 				pthread_mutex_unlock(&data->lock);
 				break ;
 			}

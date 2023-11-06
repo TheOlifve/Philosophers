@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:26:54 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 21:12:09 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/06 23:55:24 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	take_forks(t_philo *philo)
 		msg(philo, "has taken a left fork");
 	}
 	msg(philo, "is eating");
-	usleep(philo->data->eat_time * 1000);
+	my_sleep(philo->data->eat_time);
 }
 
 void	drop_forks(t_philo *philo)
@@ -37,7 +37,7 @@ void	drop_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 	msg(philo, "is sleeping");
-	usleep(philo->data->sleep_time * 1000);
+	my_sleep(philo->data->sleep_time);
 }
 
 int	eat(t_philo *philo)
@@ -59,6 +59,8 @@ void	*philo_life(void *philo_data)
 	t_philo	*philo;
 
 	philo = (t_philo *)philo_data;
+	if ((philo->id - 1) % 2)
+		usleep(3000);
 	while (philo->data->is_dead == 0)
 		if (eat(philo))
 		{
@@ -81,5 +83,10 @@ int	philo_create(t_data *data)
 	i = -1;
 	while (++i < data->ph_cnt)
 		pthread_join(data->tid[i], 0);
+	i = -1;
+	while (++i < data->ph_cnt)
+		pthread_mutex_destroy(&data->forks[i]);
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->lock);
 	return (0);
 }
