@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:12:52 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 21:11:54 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:44:32 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	parser(char **argv)
 		j = -1;
 		while (argv[i][++j])
 		{
-			if(argv[i][j] == ' ' || (argv[i][j] >= '0' && argv[i][j] <= '9'))
+			if (argv[i][j] == ' ' || (argv[i][j] >= '0' && argv[i][j] <= '9'))
 				;
 			else
 				return (1);
