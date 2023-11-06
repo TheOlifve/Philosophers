@@ -6,11 +6,18 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:41:06 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/04 16:26:21 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:11:17 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+
+int	err(char *str)
+{
+	printf("%s\n", str);
+	return (1);
+}
 
 long long	get_time(void)
 {
@@ -18,6 +25,19 @@ long long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	msg(t_philo *philo, char *str)
+{
+	long long	time;
+
+	time = get_time() - philo->data->start_time;
+	if (philo->data->is_dead == 0)
+	{
+		pthread_mutex_lock(&philo->data->print);
+		printf("%lld ms %d %s\n", time, philo->id, str);
+		pthread_mutex_unlock(&philo->data->print);
+	}
 }
 
 int	ft_atoi(const char *str)
@@ -47,4 +67,33 @@ int	ft_atoi(const char *str)
 		str1++;
 	}
 	return (num * neg);
+}
+
+void	dead_check(t_data *data, int i, long long test)
+{
+	while (data->is_dead == 0)
+	{
+		i = 0;
+		while (i++ < data->ph_cnt)
+		{
+			test = get_time();
+			pthread_mutex_lock(&data->lock);
+			if (test >= data->philo[i].time_left)
+			{
+				data->is_dead = 1;
+				pthread_mutex_lock(&data->print);
+				printf("%lld ms %d died\n", (test - data->start_time),
+				i + 1);
+				pthread_mutex_unlock(&data->print);
+				pthread_mutex_unlock(&data->lock);
+				break ;
+			}
+			else if (data->ph_cnt == data->was_eaten)
+			{
+				data->is_dead = 1;
+				break ;
+			}
+			pthread_mutex_unlock(&data->lock);
+		}
+	}
 }
