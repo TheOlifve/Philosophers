@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:41:06 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/08 17:28:58 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:31:07 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	dead_check(t_data *data, int i)
 			pthread_mutex_unlock(&data->d_lock);
 			pthread_mutex_lock(&data->print);
 			printf("%lld ms %d died\n", (get_time() - data->start_time),
-			data->philo[i].id);
+				data->philo[i].id);
 			pthread_mutex_unlock(&data->print);
 			return (1);
 		}

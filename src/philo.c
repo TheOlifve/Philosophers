@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:26:54 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/08 17:10:14 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:30:43 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,6 @@ int	eat(t_philo *philo)
 	return (0);
 }
 
-int	is_dead(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->d_lock);
-	if (philo->data->is_dead == 1)
-	{
-		pthread_mutex_unlock(&philo->data->d_lock);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->data->d_lock);
-	return (0);
-}
-
 void	*philo_life(void *philo_data)
 {	
 	int		i;
@@ -113,8 +101,7 @@ int	philo_create(t_data *data)
 
 	i = -1;
 	while (++i < data->ph_cnt)
-		if (pthread_create(&data->tid[i], NULL, philo_life,
-			&data->philo[i]))
+		if (pthread_create(&data->tid[i], NULL, philo_life, &data->philo[i]))
 			return (1);
 	while (1)
 		if (dead_check(data, -1) == 1)

@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:02:28 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/08 15:43:23 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:28:32 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	fork_init(t_data *data)
 int	philo_init(t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < data->ph_cnt)
 	{
@@ -51,14 +51,14 @@ int	philo_init(t_data *data)
 	return (0);
 }
 
-int	data_init(t_data *data, int argc, char **argv)//err - 1(Params), 2(Malloc)
+int	data_init(t_data *data, int argc, char **argv)
 {
 	data->is_dead = 0;
 	data->was_eaten = 0;
 	data->ph_cnt = ft_atoi(argv[1]);
-	data->die_time = ft_atoi(argv[2]);//in milliseconds
-	data->eat_time = ft_atoi(argv[3]);//in milliseconds
-	data->sleep_time = ft_atoi(argv[4]);//in milliseconds
+	data->die_time = ft_atoi(argv[2]);
+	data->eat_time = ft_atoi(argv[3]);
+	data->sleep_time = ft_atoi(argv[4]);
 	data->eat_cnt = -1;
 	if (argc == 6)
 		data->eat_cnt = ft_atoi(argv[5]);
@@ -66,7 +66,7 @@ int	data_init(t_data *data, int argc, char **argv)//err - 1(Params), 2(Malloc)
 		return (1);
 	if (data->die_time < 0 || data->eat_time < 0 || data->sleep_time < 0)
 		return (1);
-	data->start_time = get_time();//in milliseconds
+	data->start_time = get_time();
 	pthread_mutex_init(&data->print, NULL);
 	pthread_mutex_init(&data->d_lock, NULL);
 	pthread_mutex_init(&data->we_lock, NULL);
@@ -81,7 +81,7 @@ int	data_init(t_data *data, int argc, char **argv)//err - 1(Params), 2(Malloc)
 int	load(t_data *data, int argc, char **argv)
 {
 	int	data_check;
-	
+
 	data_check = data_init(data, argc, argv);
 	if (data_check == 1)
 		return (err("ERROR - 1:Wrong parameters"));
