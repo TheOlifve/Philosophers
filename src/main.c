@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:12:52 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 22:50:23 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:46:41 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	parser(char **argv)
 	i = 0;
 	while (argv[++i])
 	{
+		if (!argv[i] || !*argv[i])
+			return (1);
 		j = -1;
 		while (argv[i][++j])
 		{

@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 13:02:28 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/06 23:38:54 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:43:23 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ int	philo_init(t_data *data)
 	{
 		data->philo[i].id = i + 1;
 		data->philo[i].eat_cnt = 0;
-		data->philo[i].time_left = get_time() + data->die_time;//in milliseconds
+		data->philo[i].last_eat = get_time();
 		data->philo[i].data = data;
+		pthread_mutex_init(&data->philo[i].lock, NULL);
+		pthread_mutex_init(&data->philo[i].t_lock, NULL);
 		i++;
 	}
 	return (0);
@@ -57,17 +59,17 @@ int	data_init(t_data *data, int argc, char **argv)//err - 1(Params), 2(Malloc)
 	data->die_time = ft_atoi(argv[2]);//in milliseconds
 	data->eat_time = ft_atoi(argv[3]);//in milliseconds
 	data->sleep_time = ft_atoi(argv[4]);//in milliseconds
+	data->eat_cnt = -1;
 	if (argc == 6)
 		data->eat_cnt = ft_atoi(argv[5]);
-	else
-		data->eat_cnt = -1;
 	if (data->ph_cnt < 1 || data->eat_cnt == 0)
 		return (1);
 	if (data->die_time < 0 || data->eat_time < 0 || data->sleep_time < 0)
 		return (1);
 	data->start_time = get_time();//in milliseconds
-	pthread_mutex_init(&data->lock, NULL);
 	pthread_mutex_init(&data->print, NULL);
+	pthread_mutex_init(&data->d_lock, NULL);
+	pthread_mutex_init(&data->we_lock, NULL);
 	data->tid = malloc(sizeof(pthread_t) * data->ph_cnt);
 	data->philo = malloc(sizeof(t_philo) * data->ph_cnt);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->ph_cnt);
