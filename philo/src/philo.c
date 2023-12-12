@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 23:26:54 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/22 15:32:41 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:12:12 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	eat(t_philo *philo)
 }
 
 void	*philo_life(void *philo_data)
-{	
+{
 	int		i;
 	t_philo	*philo;
 
@@ -101,11 +101,8 @@ void	*philo_life(void *philo_data)
 	return (0);
 }
 
-int	philo_create(t_data *data)
+int	philo_create(t_data *data, int i)
 {
-	int	i;
-
-	i = -1;
 	while (++i < data->ph_cnt)
 		if (pthread_create(&data->tid[i], NULL, philo_life, &data->philo[i]))
 			return (1);

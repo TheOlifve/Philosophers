@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:12:52 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/22 15:44:15 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:12:35 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int	err(char *str)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	
+
 	if (argc < 5 || argc > 6)
 		return (err("ERROR - 1:Wrong number of parameters"));
 	if (parser(argv) == 1)
 		return (err("ERROR - 1:Wrong parameters"));
 	if (load(&data, argc, argv))
 		return (1);
-	philo_create(&data);
+	philo_create(&data, -1);
 	free(data.tid);
 	free(data.philo);
 	free(data.forks);

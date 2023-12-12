@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:41:06 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/22 15:34:28 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:15:28 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,9 @@ int	dead_check(t_data *data, int i, int check)
 		pthread_mutex_lock(&data->d_lock);
 		pthread_mutex_lock(&data->we_lock);
 		if (data->was_eaten == data->ph_cnt)
-			check = 1;
+			check = -1;
 		pthread_mutex_unlock(&data->we_lock);
 		pthread_mutex_unlock(&data->d_lock);
 	}
-	if (check == 1)
-		return (-1);
-	return (0);
+	return (check);
 }

@@ -6,7 +6,7 @@
 /*   By: hrahovha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:44:22 by hrahovha          #+#    #+#             */
-/*   Updated: 2023/11/18 21:54:59 by hrahovha         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:12:23 by hrahovha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
 int			err(char *str);
 int			is_dead(t_philo *philo);
 int			ft_atoi(const char *str);
-int			philo_create(t_data *data);
+int			philo_create(t_data *data, int i);
 int			load(t_data *data, int argc, char **argv);
 int			dead_check(t_data *data, int i, int check);
 void		my_sleep(t_data *data, int time);
