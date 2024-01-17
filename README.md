@@ -1,5 +1,8 @@
 # Philosophers
 
+This project is a training to multi-threads programming with the use of mutex.
+This project is also a good lesson in C optimization as we need to save every bit of CPU usage we can to ensure the survival of our philosophers.
+
 In computer science, the dining philosophers problem is an example problem often used in concurrent algorithm design to illustrate synchronization issues and techniques for resolving them.
 
 It was originally formulated in 1965 by Edsger Dijkstra. Soon after, Tony Hoare gave the problem its present formulation.
